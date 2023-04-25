@@ -22,8 +22,8 @@ const toNumber = (input) => {
 }
 
 // set the latitude, longitude, and timezone
-var latitude = (-1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)).toFixed(2)
-var longitude = (-1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)).toFixed(2)
+var latitude = Number(-1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)).toFixed(2)
+var longitude = Number(-1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)).toFixed(2)
 const timezone = moment.tz.guess()
 
 // make the API request
@@ -39,7 +39,7 @@ if(cliArgs.j){
 
 // get the correct day
 var day = 1
-if(cliArgs.d){
+if(!(cliArgs.d == undefined)){
     day = cliArgs.d
 }
 
@@ -52,9 +52,9 @@ if(rain > 0){
 }
 
 // finish printing the output
-if(day = 0){
+if(day == 0){
     process.stdout.write("today.")
-} else if(day = 1){
+} else if(day == 1){
     process.stdout.write("tomorrow.")
 } else {
     process.stdout.write("in " + day + " days.")
