@@ -24,7 +24,10 @@ const toNumber = (input) => {
 // set the latitude, longitude, and timezone
 var latitude = Number(-1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)).toFixed(2)
 var longitude = Number(-1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)).toFixed(2)
-const timezone = moment.tz.guess()
+var timezone = moment.tz.guess()
+if (!(cliArgs.j == undefined)){
+    timezone = cliArgs.j
+}
 
 // make the API request
 var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude +  "&timezone=" + timezone + "&daily=precipitation_hours";
