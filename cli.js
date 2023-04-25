@@ -22,9 +22,31 @@ const toNumber = (input) => {
 }
 
 // set the latitude, longitude, and timezone
-var Latitude = -1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)
-var Longitude = -1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)
+var latitude = -1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)
+var longitude = -1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)
 const timezone = moment.tz.guess()
-console.log(Latitude)
 
+// make the API request
 var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude +  "&timezone=" + timezone + "&daily=precipitation_hours";
+const response = await fetch(url)
+const data = await response.json()
+
+// print json for -j switch
+if(cliArgs.j){
+    console.log(data)
+    process.exit(0)
+}
+
+// get the correct day
+var day = 1
+if(cliArgs.d){
+    day = cliArgs.d
+}
+
+// get the amount of rain
+const rain = data.daily.precipitation_hours[day]
+if(rain > 0){
+    process.stdout.write("You might need your galoshes ")
+} else {
+    process.stdout.write("You will not need your galoshes ")
+}
