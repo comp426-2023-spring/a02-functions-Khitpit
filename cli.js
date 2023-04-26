@@ -25,8 +25,8 @@ const toNumber = (input) => {
 var latitude = Number(-1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)).toFixed(2)
 var longitude = Number(-1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)).toFixed(2)
 var timezone = moment.tz.guess()
-if (!(cliArgs.j == undefined)){
-    timezone = cliArgs.j
+if (!(cliArgs.z == undefined)){
+    timezone = cliArgs.z
 }
 
 // make the API request
