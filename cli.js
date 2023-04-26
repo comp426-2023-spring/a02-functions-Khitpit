@@ -21,20 +21,21 @@ const toNumber = (input) => {
     }
 }
 
-
+// Check for valid latitude and longitude
+if(cliArgs.w == undefined & cliArgs.e == undefined) {
+    process.stdout.write("Latitude must be in range.\n")
+    process.exit(0)
+}
+if(cliArgs.n == undefined & cliArgs.s == undefined) {
+    process.stdout.write("Longitude must be in range.\n")
+    process.exit(0)
+}
 // set the latitude, longitude, and timezone
 var latitude = Number(-1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)).toFixed(2)
 var longitude = Number(-1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)).toFixed(2)
 var timezone = moment.tz.guess()
 if (!(cliArgs.z == undefined)){
     timezone = cliArgs.z
-}
-// Added these checks to remove default latitide and longitude
-if(cliArgs.w == undefined & cliArgs.e == undefined) {
-    latitude = undefined   
-}
-if(cliArgs.n == undefined & cliArgs.s == undefined) {
-    longitude = undefined
 }
 
 
