@@ -21,6 +21,7 @@ const toNumber = (input) => {
     }
 }
 
+
 // set the latitude, longitude, and timezone
 var latitude = Number(-1 * toNumber(cliArgs.w) + toNumber(cliArgs.e)).toFixed(2)
 var longitude = Number(-1 * toNumber(cliArgs.s) + toNumber(cliArgs.n)).toFixed(2)
@@ -28,6 +29,14 @@ var timezone = moment.tz.guess()
 if (!(cliArgs.z == undefined)){
     timezone = cliArgs.z
 }
+// Added these checks to remove default latitide and longitude
+if(cliArgs.w == undefined & cliArgs.e == undefined) {
+    latitude = undefined   
+}
+if(cliArgs.n == undefined & cliArgs.s == undefined) {
+    longitude = undefined
+}
+
 
 // make the API request
 var url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude +  "&timezone=" + timezone + "&daily=precipitation_hours";
